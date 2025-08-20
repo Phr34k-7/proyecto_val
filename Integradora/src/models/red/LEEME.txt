@@ -1,0 +1,41 @@
+Proyecto: Monitor de Dispositivos de Red
+
+Este proyecto es una evolución del escáner de red inicial. Ahora, en lugar de realizar una única validación de IPs, se ha
+transformado en un monitor continuo que vigila la red en busca de nuevos dispositivos.
+
+Su principal objetivo es alertar sobre conexiones de dispositivos no autorizados y ofrecer una opción para darles permiso,
+registrándolos de forma permanente en la base de datos.
+
+Qué se añadió
+Monitoreo Periódico: El programa se ejecuta en un bucle infinito que escanea la red cada 30 segundos, lo que le permite 
+detectar dispositivos en tiempo real.
+
+Identificación de Nuevos Dispositivos: El código ahora compara la lista de dispositivos detectados con la lista de 
+IPs autorizadas de la base de datos. Si una IP no está en la base de datos, la identifica como un dispositivo nuevo.
+
+Sistema de Alerta Interactiva: Cuando se detecta un nuevo dispositivo, el programa muestra una alerta clara en la consola.
+Luego, solicita al usuario una acción: darle permiso o denegar la conexión, registrando el resultado en la base de datos.
+
+Componentes Clave
+ARPScanner.java: La clase original se ha refactorizado para enfocarse únicamente en las funciones básicas:
+
+escanear(): Ahora solo se encarga de obtener la lista de dispositivos de la red.
+
+obtenerIpsDeBD(): Carga las IPs autorizadas desde la base de datos.
+
+agregarDispositivoAutorizado(): Inserta un nuevo dispositivo en la tabla direccionamiento.
+
+NetworkMonitor.java: Esta es la nueva clase principal. Contiene el bucle de monitoreo y la lógica para:
+
+Ejecutar escaneos de forma repetida.
+
+Comparar los resultados con la base de datos.
+
+Mostrar alertas y solicitar la interacción del usuario.
+
+Instrucciones para la Ejecución
+Asegúrate de que tus credenciales de MySQL estén correctamente configuradas en el archivo ARPScanner.java.
+
+Añade el conector de MySQL (.jar) a tu proyecto.
+
+Ejecuta el programa desde la clase NetworkMonitor para iniciar el monitoreo.
